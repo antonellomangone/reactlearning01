@@ -3,15 +3,9 @@ import BlogList from "./BlogList";
 
 const Home = () => {
 
-    // const [blogs, setBlogs] = useState([
-    //     {id:1, title:"My new website", author:"mario", body:"lorem ipsum..."},
-    //     {id:2, title:"Welcome party!", author:"yoshi", body:"lorem ipsum..."},
-    //     {id:3, title:"Web dev top tips", author:"mario", body:"lorem ipsum..."}
-    // ]);
-
     const [blogs, setBlogs] = useState(null);    
-
-    const [name, setName] = useState('mario');
+    const [isPending, setIsPending] = useState(true);
+    const [error, setError] = useState(null);
 
     const handleDelete = (id) => {
         const newBlogs = blogs.filter(blog => blog.id !== id);
@@ -19,18 +13,42 @@ const Home = () => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:8000/blogs')
-        .then((res) => {
-            return res.json();
-        })
-        .then((data) => {
-            setBlogs(data);
-        })
+        const callapi = setTimeout(() => {
+            fetch('http://localhost:8000/blogs')
+            .then((res) => {
+                console.log(res);
+                if (!res.ok) {
+                    throw Error('could not fetch the data for that resource');
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setBlogs(data);
+                setIsPending(false);
+                setError(null);
+            })
+            .catch((err) => {
+                // console.log(err.message);
+                setError(err.message);
+                setIsPending(false);
+                setBlogs(null);
+            });
+        }, 1000);
+
+        return () => {
+            clearTimeout(callapi);
+            console.log("Cleanup");
+        };
+
     }, []);
+
 
     return (
         <div className="home">
-            { blogs && <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} /> }
+            { error && <div>{ error }</div>}
+            { isPending && <div>Loading...</div> }
+            {/* blogs && <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} /> */}
+            { blogs && <BlogList blogs={blogs} title="All Blogs!" /> }
         </div>
     );
 }
