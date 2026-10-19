@@ -1,16 +1,29 @@
 {
-    "blogs": [
-        {
-            "title":"My First Blog",
-            "body":"Why do we use it? It is a long established fact that a reader will be distracted ... ",
-            "author":"mario",
-            "id":1
-        },
-        {
-            "title":"Opening Party!",
-            "body":"Why do we use it?\nIt is a long established fact that a reader will be distracted ... ",
-            "author":"yoshi",
-            "id":2
-        }        
-    ]
+  "blogs": [
+    {
+      "title": "My First Blog",
+      "body": "Why do we use it? It is a long established fact that a reader will be distracted ... ",
+      "author": "mario",
+      "id": "1"
+    },
+    {
+      "title": "Opening Party!",
+      "body": "Why do we use it?\nIt is a long established fact that a reader will be distracted ... ",
+      "author": "yoshi",
+      "id": "2"
+    },
+    {
+      "title": "Aranzulla.it",
+      "body": "Il blog di Salvatore Aranzulla è il sito di tecnologia più visitato in Italia, con milioni di guide pratiche e risoluzione di problemi digitali.",
+      "author": "Mario",
+      "id": "S1FNIeO6HdI"
+    },
+    {
+      "title": "Giallo Zafferano",
+      "body": "Il portale e blog di cucina più popolare d'Italia, fondato da Sonia Peronaci, punto di riferimento per ricette tradizionali e video-tutorial.",
+      "author": "Yoshi",
+      "id": "Lc7qA09QaOc"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
